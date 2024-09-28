@@ -1,0 +1,33 @@
+db.createCollection("user_sessions", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["company_code", "user_code", "session_time", "prompts_count", "energy_consumed"],
+      properties: {
+        company_code: {
+          bsonType: "string",
+          description: "must be a string of 6 alphanumeric characters and is required",
+          pattern: "^[a-zA-Z0-9]{6}$"
+        },
+        user_code: {
+          bsonType: "string",
+          description: "must be a string of 3 alphanumeric characters and is required",
+          pattern: "^[a-zA-Z0-9]{3}$"
+        },
+        session_time: {
+          bsonType: "int",
+          description: "must be an integer representing the time spent in seconds and is required"
+        },
+        prompts_count: {
+          bsonType: "int",
+          description: "must be an integer representing the number of prompts entered during the session and is required"
+        },
+        energy_consumed: {
+          bsonType: "double",
+          description: "must be a double representing the energy consumed during the session and is required"
+        }
+      }
+    }
+  }
+});
+
